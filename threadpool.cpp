@@ -5,6 +5,7 @@
 #include <queue>
 #include <exception>
 
+
 using namespace std;
 
 
@@ -15,6 +16,7 @@ private:
 
 	thread * th;
 	mutex mtx;
+	queue<function<void()>> q;
 	unsigned int num_threads;
 	bool exit_flag,state;
 	int cont=0;
@@ -33,10 +35,13 @@ public:
 
 	ThreadPool()=delete;
 	ThreadPool(unsigned int num_threads);
-	void submit();
+
+	template <class Func,class... Args>
+	void submit(Func&& f,Args&&... args);
 	void finish(bool secure=true);
 	bool status();
 	~ThreadPool();
+
 
 };
 
@@ -47,11 +52,21 @@ ThreadPool::ThreadPool(unsigned int num_threads):num_threads(num_threads){
 
 	function<void(void)> f=[&](){
 
+					function<void()> f;
+
 					while(!this->exit_flag && this->state){
 						mtx.lock();
 
+						if(!this->q.empty()){
+							f=this->q.front();
+							q.pop();
 
-						mtx.unlock();
+							mtx.unlock();
+
+							f();
+						}else{
+							mtx.unlock();
+						}
 					}
 				};
 
@@ -89,6 +104,20 @@ bool ThreadPool::status(){
 	return this->state;
 }
 
+template <class Func,class... Args>
+void ThreadPool::submit(Func&& f,Args&&... args){
+
+	mtx.lock();
+
+	this->q.push(
+		[&](){
+			f(args...);
+		}
+	);
+
+	mtx.unlock();
+
+}
 
 
 

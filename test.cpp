@@ -1,8 +1,11 @@
+#include <any>
 #include <iostream>
 #include <thread>
 #include <mutex>
 #include <functional>
 #include <queue>
+#include <vector>
+
 
 
 using namespace std;
@@ -79,22 +82,31 @@ int main(){
     //
     // t2.join();
 
-    queue<int> q;
-    int aux;
+    // queue<int> q;
+    // int aux;
+    //
+    // q.push(1);
+    // q.push(2);
+    // q.push(3);
+    //
+    // aux=q.front();
+    // cout<<q.size()<<" "<<aux<<endl;
+    // q.pop();
+    // aux=q.front();
+    // cout<<q.size()<<" "<<aux<<endl;
+    // q.pop();
+    // aux=q.front();
+    // cout<<q.size()<<" "<<aux<<endl;
+    // q.pop();
 
-    q.push(1);
-    q.push(2);
-    q.push(3);
+    vector<int> v(2);
 
-    aux=q.front();
-    cout<<q.size()<<" "<<aux<<endl;
-    q.pop();
-    aux=q.front();
-    cout<<q.size()<<" "<<aux<<endl;
-    q.pop();
-    aux=q.front();
-    cout<<q.size()<<" "<<aux<<endl;
-    q.pop();
+    v[0]=1;
+    v[1]=3;
+
+    cout<<v[0]<<endl;
+
+    queue<function<void()>> f;
 
     return 0;
 }
