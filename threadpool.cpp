@@ -4,6 +4,7 @@
 #include <functional>
 #include <queue>
 #include <exception>
+#include "test.hpp"
 
 
 using namespace std;
@@ -40,6 +41,7 @@ public:
 	void submit(Func&& f,Args&&... args);
 	void finish(bool secure=true);
 	bool status();
+	void wait();
 	~ThreadPool();
 
 
@@ -147,11 +149,27 @@ ThreadPool::~ThreadPool(){
 }
 
 
+
+void ThreadPool::wait(){
+	while(!this->q.empty()){
+
+	}
+}
+
+
+
+
 int main(int argc, char * argv[]){
 
 
 	ThreadPool thp{10};
 
+	for(int i=0;i<20;i++){
+		thp.submit(test1);
+	}
+
+
+	thp.wait();
 
 	if(thp.status()){
 		thp.finish();
