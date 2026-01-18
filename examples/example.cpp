@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../include/ThreadPool.hpp"
-#include "../include/test.hpp"
+#include "ThreadPool.hpp"
+#include "test.hpp"
 
 
 using namespace std;

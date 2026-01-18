@@ -65,11 +65,27 @@ To generate the documentation of the project:
 make documentation
 ```
 
-<!--## Building
+## Building
 
 This project does not require a build system by default.
 
-Example compilation using `g++`:
+Example compilation using the make file:
+
+- For the example file. This compilation contains the debuging and profile flags.
 
 ```bash
-g++ -std=c++11 -Iinclude src/ThreadPool.cpp examples/basic_example.cpp -o example-->
+make example
+```
+
+- Compilation as an shared library.
+
+```bash
+make
+```
+
+- Compilation as a static library.
+
+```bash
+make
+```
+
