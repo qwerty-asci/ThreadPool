@@ -3,10 +3,11 @@
 
 #include <iostream>
 #include <thread>
+#include <chrono>
 
 using namespace std;
 
-void test1();
+void test1(int);
 void test2(int,int);
 
 template <class T>

@@ -18,6 +18,8 @@
 #include <queue>
 #include <exception>
 #include <condition_variable>
+#include <atomic>
+
 
 using namespace std;
 
@@ -42,6 +44,9 @@ private:
     /** Mutex protecting access to the task queue */
     mutex mtx;
 
+    /** Mutex protecting used to wait until all the process finish */
+    mutex mtx2;
+
     /** Queue containing pending tasks */
     queue<function<void()>> q;
 
@@ -49,16 +54,16 @@ private:
     unsigned int num_threads;
 
     /** Flag indicating when threads should terminate */
-    bool exit_flag;
+    atomic<bool> exit_flag;
 
     /** Indicates whether the thread pool is active */
-    bool state;
-
-    /** Auxiliary counter (currently unused) */
-    int cont = 0;
+    atomic<bool> state;
 
     /** Condition variable used to stop the threads until a new process is pushed */
     condition_variable cv;
+
+    /** Condition variable used to wait until all the queue finish */
+    condition_variable cv2;
 
 public:
 
@@ -130,6 +135,7 @@ public:
  */
 template <class Func, class... Args>
 void ThreadPool::submit(Func&& f, Args&&... args) {
+
 
     {
         lock_guard<mutex> lock(this->mtx);

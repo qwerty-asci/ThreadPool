@@ -27,21 +27,32 @@ ThreadPool::ThreadPool(unsigned int num_threads)
 
         unique_lock<mutex> lock(this->mtx);
 
-        while (!this->exit_flag && this->state) {
-            cv.wait(lock,[&](){return !this->q.empty();});
+        while (!this->exit_flag.load() && this->state.load()) {
 
-            if (!this->q.empty()) {
-                task = move(this->q.front());
-                this->q.pop();
 
-                this->mtx.unlock();
+            cv.wait(lock,[&](){
+                    return !this->q.empty() || (this->exit_flag.load() || !this->state.load());
+                }
+            );
 
-                task();
+
+
+            if(this->exit_flag.load() || !this->state.load()){
+                lock.unlock();
+                break;
             }
+
+            task = move(this->q.front());
+            this->q.pop();
+
+            lock.unlock();
+            task();
+            this->cv2.notify_one();
+            lock.lock();
         }
     };
 
-    exit_flag = false;
+    this->exit_flag = false;
 
     this->th = new (nothrow) thread[num_threads];
 
@@ -54,7 +65,7 @@ ThreadPool::ThreadPool(unsigned int num_threads)
             }
         } catch (exception&) {
             this->state = false;
-            cout << "The system is unable to start a new thread" << endl;
+            // cout << "The system is unable to start a new thread" << endl;
         }
     } else {
         this->state = false;
@@ -78,15 +89,18 @@ bool ThreadPool::status() {
 void ThreadPool::finish(bool secure) {
     this->exit_flag = true;
 
-    if (secure && this->state) {
+    this->cv.notify_all();
+
+    if (secure && this->state.load()) {
         for (unsigned int i = 0; i < this->num_threads; i++) {
             if (this->th[i].joinable()) {
                 try {
                     this->th[i].join();
                 } catch (...) {
-                    cout << "Error joining thread " << i << endl;
+                    // cout << "Error joining thread " << i << endl;
                 }
             }
+
         }
         this->state = false;
     }
@@ -112,7 +126,11 @@ ThreadPool::~ThreadPool() {
  * @warning This function uses busy waiting and may waste CPU time.
  */
 void ThreadPool::wait() {
-    while (!this->q.empty()) {
-        // Busy wait
-    }
+    unique_lock<mutex> lock(this->mtx2);
+
+    this->cv2.wait(lock,[&](){
+            return this->q.empty();
+        }
+    );
+
 }

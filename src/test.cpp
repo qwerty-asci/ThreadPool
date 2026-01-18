@@ -4,8 +4,9 @@
 
 using namespace std;
 
-void test1(){
-    cout<<this_thread::get_id()<<" Proceso dentro de test1"<<endl;
+void test1(int x){
+    // this_thread::sleep_for(1000ms);
+    cout<<this_thread::get_id()<<" Proceso dentro de test1 "<<x<<endl;
 }
 
 

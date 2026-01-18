@@ -23,7 +23,7 @@ static:
 	@ar rcs lib/libthreadpool.a build/ThreadPool.o
 
 
-example: src/test.cpp include/test.hpp examples/example.cpp include/ThreadPool.hpp
+example: src/test.cpp include/test.hpp examples/example.cpp include/ThreadPool.hpp src/ThreadPool.cpp
 	@echo "Compiling example.cpp into example"
 	@${CXX} -o example ${CXXFLAGS_DEB} ${CXXFILES_EXAMPLE} examples/example.cpp
 
@@ -32,3 +32,5 @@ example: src/test.cpp include/test.hpp examples/example.cpp include/ThreadPool.h
 documentation: src/ThreadPool.cpp include/ThreadPool.hpp
 	@doxygen -q Doxyfile > /dev/null 2>&1
 	@cd docs/latex;make;mv refman.pdf ../doc.pdf
+clean:
+	@rm example
