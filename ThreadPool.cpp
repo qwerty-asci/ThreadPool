@@ -25,12 +25,6 @@ ThreadPool::ThreadPool(unsigned int num_threads):num_threads(num_threads){
 					}
 				};
 
-
-
-
-
-
-
 	exit_flag=false;
 
 	this->th=new (nothrow) thread[num_threads];
