@@ -25,17 +25,18 @@ ThreadPool::ThreadPool(unsigned int num_threads)
 
         function<void()> task;
 
+        unique_lock<mutex> lock(this->mtx);
+
         while (!this->exit_flag && this->state) {
-            mtx.lock();
+            cv.wait(lock,[&](){return !this->q.empty();});
 
             if (!this->q.empty()) {
-                task = this->q.front();
-                q.pop();
+                task = move(this->q.front());
+                this->q.pop();
 
-                mtx.unlock();
+                this->mtx.unlock();
+
                 task();
-            } else {
-                mtx.unlock();
             }
         }
     };
@@ -98,7 +99,11 @@ void ThreadPool::finish(bool secure) {
  */
 ThreadPool::~ThreadPool() {
     this->finish();
-    delete[] this->th;
+    try{
+        delete[] this->th;
+    }catch(...){
+
+    }
 }
 
 /**

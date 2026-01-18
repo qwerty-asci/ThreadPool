@@ -2,11 +2,14 @@ CXX=g++
 CXXFLAGS_PROD=-O3 -std=c++17 -Wall -Iinclude -fPIC -shared
 CXXFLAGS_STAT=-O3 -c -std=c++11 -Iinclude
 CXXFLAGS_DEB=-g -pg -std=c++17 -Wall -Iinclude
-CXXFILES=src/test.cpp src/ThreadPool.cpp
+CXXFILES_EXAMPLE=src/test.cpp src/ThreadPool.cpp
 
 CXXFILES=src/ThreadPool.cpp
 
-all:
+all: shared documentation
+
+
+shared:
 	@echo "Creating a shared library"
 	@mkdir -p lib
 	@echo "Result saved on lib"
@@ -22,10 +25,10 @@ static:
 
 example: src/test.cpp include/test.hpp examples/example.cpp include/ThreadPool.hpp
 	@echo "Compiling example.cpp into example"
-	@${CXX} -o example ${CXXFLAGS_DEB} ${CXXFILES} examples/example.cpp
+	@${CXX} -o example ${CXXFLAGS_DEB} ${CXXFILES_EXAMPLE} examples/example.cpp
 
 
 # Target for the creation of the documentation
 documentation: src/ThreadPool.cpp include/ThreadPool.hpp
-	@doxygen Doxyfile
+	@doxygen -q Doxyfile > /dev/null 2>&1
 	@cd docs/latex;make;mv refman.pdf ../doc.pdf

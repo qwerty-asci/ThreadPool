@@ -97,6 +97,6 @@ INTERACTIVE_SVG        = YES
 # Miscellaneous
 #-----------------------------
 
-QUIET                  = NO
+QUIET                  = YES
 GENERATE_TREEVIEW      = YES
 FULL_PATH_NAMES        = NO

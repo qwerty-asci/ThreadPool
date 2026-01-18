@@ -1,7 +1,7 @@
 
 /**
  * @file ThreadPool.hpp
- * @author
+ * @author qwert-asci
  * @brief Declaration of a simple ThreadPool class.
  *
  * This file contains the declaration of a basic thread pool
@@ -17,6 +17,7 @@
 #include <functional>
 #include <queue>
 #include <exception>
+#include <condition_variable>
 
 using namespace std;
 
@@ -56,6 +57,9 @@ private:
     /** Auxiliary counter (currently unused) */
     int cont = 0;
 
+    /** Condition variable used to stop the threads until a new process is pushed */
+    condition_variable cv;
+
 public:
 
     /**
@@ -83,7 +87,6 @@ public:
      * @param f Function to execute.
      * @param args Arguments passed to the function.
      *
-     * @warning This method does not notify worker threads.
      */
     template <class Func, class... Args>
     void submit(Func&& f, Args&&... args);
@@ -128,15 +131,20 @@ public:
 template <class Func, class... Args>
 void ThreadPool::submit(Func&& f, Args&&... args) {
 
-    mtx.lock();
+    {
+        lock_guard<mutex> lock(this->mtx);
 
-    this->q.push(
-        [&]() {
-            f(args...);
-        }
-    );
 
-    mtx.unlock();
+        this->q.push(
+            move(
+                [&]() {
+                    f(args...);
+                }
+            )
+        );
+    }
+
+    this->cv.notify_one();
 }
 
 #endif
