@@ -1,0 +1,141 @@
+/**
+ * @file ThreadPool.hpp
+ * @author
+ * @brief Declaration of a simple ThreadPool class.
+ *
+ * This file contains the declaration of a basic thread pool
+ * that executes tasks using a fixed number of worker threads.
+ */
+
+#ifndef THREADPOOL_HPP
+#define THREADPOOL_HPP
+
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <functional>
+#include <queue>
+#include <exception>
+
+using namespace std;
+
+/**
+ * @class ThreadPool
+ * @brief Manages a pool of worker threads to execute tasks concurrently.
+ *
+ * The ThreadPool maintains a queue of tasks. Worker threads continuously
+ * fetch and execute tasks from this queue until the pool is stopped.
+ *
+ * @note Tasks have no return value.
+ * @warning This implementation uses busy waiting and does not use
+ *          condition variables.
+ */
+class ThreadPool {
+
+private:
+
+    /** Pointer to the array of worker threads */
+    thread* th;
+
+    /** Mutex protecting access to the task queue */
+    mutex mtx;
+
+    /** Queue containing pending tasks */
+    queue<function<void()>> q;
+
+    /** Number of threads managed by the pool */
+    unsigned int num_threads;
+
+    /** Flag indicating when threads should terminate */
+    bool exit_flag;
+
+    /** Indicates whether the thread pool is active */
+    bool state;
+
+    /** Auxiliary counter (currently unused) */
+    int cont = 0;
+
+public:
+
+    /**
+     * @brief Deleted default constructor.
+     *
+     * Forces the user to specify the number of threads.
+     */
+    ThreadPool() = delete;
+
+    /**
+     * @brief Constructs a ThreadPool with a fixed number of threads.
+     *
+     * @param num_threads Number of worker threads to create.
+     */
+    explicit ThreadPool(unsigned int num_threads);
+
+    /**
+     * @brief Submits a task to the thread pool.
+     *
+     * The task is stored in the internal queue and will be executed
+     * by one of the worker threads.
+     *
+     * @tparam Func Callable object type.
+     * @tparam Args Argument types for the callable.
+     * @param f Function to execute.
+     * @param args Arguments passed to the function.
+     *
+     * @warning This method does not notify worker threads.
+     */
+    template <class Func, class... Args>
+    void submit(Func&& f, Args&&... args);
+
+    /**
+     * @brief Stops the thread pool.
+     *
+     * Sets the exit flag and optionally waits for all threads to finish.
+     *
+     * @param secure If true, joins all worker threads.
+     */
+    void finish(bool secure = true);
+
+    /**
+     * @brief Returns the current state of the thread pool.
+     *
+     * @return True if the pool is running, false otherwise.
+     */
+    bool status();
+
+    /**
+     * @brief Waits until the task queue becomes empty.
+     *
+     * @note This function performs a busy wait.
+     */
+    void wait();
+
+    /**
+     * @brief Destructor.
+     *
+     * Stops the pool and releases all allocated resources.
+     */
+    ~ThreadPool();
+};
+
+/**
+ * @brief Adds a new task to the task queue.
+ *
+ * Locks the mutex, pushes the task into the queue,
+ * and then unlocks the mutex.
+ */
+template <class Func, class... Args>
+void ThreadPool::submit(Func&& f, Args&&... args) {
+
+    mtx.lock();
+
+    this->q.push(
+        [&]() {
+            f(args...);
+        }
+    );
+
+    mtx.unlock();
+}
+
+#endif

@@ -21,3 +21,7 @@ debug: ThreadPool.cpp main.cpp test.cpp
 test: test.cpp
 	@echo "Debuging version"
 	@${CXX} ${CXXFLAGS_DEB} test.cpp
+
+documentation: src/ThreadPool.cpp include/ThreadPool.hpp
+	@doxygen Doxyfile
+	@cd docs/latex;make;mv refman.pdf ../../

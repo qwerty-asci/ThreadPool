@@ -1,10 +1,16 @@
-#include "ThreadPool.hpp"
+/**
+ * @file ThreadPool.cpp
+ * @brief Implementation of the ThreadPool class.
+ */
+
+#include "../include/ThreadPool.hpp"
 
 /**
- * @brief Creates and starts the worker threads.
+ * @brief Constructs and starts the worker threads.
  *
- * Each worker thread continuously checks the task queue and
- * executes available tasks until the exit flag is set.
+ * Each worker thread runs a loop that retrieves tasks
+ * from the queue and executes them until termination
+ * is requested.
  */
 ThreadPool::ThreadPool(unsigned int num_threads)
     : num_threads(num_threads) {
@@ -12,23 +18,22 @@ ThreadPool::ThreadPool(unsigned int num_threads)
     /**
      * @brief Worker thread function.
      *
-     * Threads repeatedly fetch tasks from the queue and execute them
+     * Continuously checks the task queue and executes tasks
      * while the pool is active and the exit flag is not set.
      */
     function<void(void)> f = [&]() {
 
-        function<void()> f;
+        function<void()> task;
 
         while (!this->exit_flag && this->state) {
             mtx.lock();
 
             if (!this->q.empty()) {
-                f = this->q.front();
+                task = this->q.front();
                 q.pop();
 
                 mtx.unlock();
-
-                f();
+                task();
             } else {
                 mtx.unlock();
             }
@@ -37,7 +42,6 @@ ThreadPool::ThreadPool(unsigned int num_threads)
 
     exit_flag = false;
 
-    // Allocate thread array
     this->th = new (nothrow) thread[num_threads];
 
     if (this->th != nullptr) {
@@ -47,28 +51,28 @@ ThreadPool::ThreadPool(unsigned int num_threads)
             for (unsigned int i = 0; i < this->num_threads; i++) {
                 this->th[i] = thread(f);
             }
-        } catch (exception& e) {
+        } catch (exception&) {
             this->state = false;
             cout << "The system is unable to start a new thread" << endl;
         }
-
     } else {
         this->state = false;
     }
 }
 
 /**
- * @brief Returns whether the thread pool is running.
+ * @brief Checks whether the thread pool is running.
+ *
+ * @return True if the pool is active, false otherwise.
  */
 bool ThreadPool::status() {
     return this->state;
 }
 
 /**
- * @brief Signals all threads to stop and optionally joins them.
+ * @brief Stops the thread pool and optionally joins threads.
  *
- * If secure mode is enabled, this function waits for all
- * worker threads to terminate before returning.
+ * @param secure If true, waits for all threads to finish execution.
  */
 void ThreadPool::finish(bool secure) {
     this->exit_flag = true;
@@ -79,7 +83,7 @@ void ThreadPool::finish(bool secure) {
                 try {
                     this->th[i].join();
                 } catch (...) {
-                    cout << "Error joining the thread i" << endl;
+                    cout << "Error joining thread " << i << endl;
                 }
             }
         }
@@ -90,18 +94,17 @@ void ThreadPool::finish(bool secure) {
 /**
  * @brief Destructor.
  *
- * Ensures that all threads are stopped and memory is released.
+ * Ensures that the pool is stopped and memory is released.
  */
 ThreadPool::~ThreadPool() {
-
     this->finish();
     delete[] this->th;
 }
 
 /**
- * @brief Waits until the task queue becomes empty.
+ * @brief Waits until all queued tasks have been processed.
  *
- * This method performs a busy wait and does not block efficiently.
+ * @warning This function uses busy waiting and may waste CPU time.
  */
 void ThreadPool::wait() {
     while (!this->q.empty()) {
