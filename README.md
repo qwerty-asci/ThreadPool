@@ -57,6 +57,14 @@ ThreadPool/
 
 ---
 
+## Requirements
+
+To generate the documentation of the project:
+
+```bash
+make documentation
+```
+
 <!--## Building
 
 This project does not require a build system by default.
