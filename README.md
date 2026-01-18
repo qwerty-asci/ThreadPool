@@ -86,6 +86,6 @@ make
 - Compilation as a static library.
 
 ```bash
-make
+make static
 ```
 
