@@ -31,8 +31,6 @@ using namespace std;
  * fetch and execute tasks from this queue until the pool is stopped.
  *
  * @note Tasks have no return value.
- * @warning This implementation uses busy waiting and does not use
- *          condition variables.
  */
 class ThreadPool {
 
