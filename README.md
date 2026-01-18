@@ -18,28 +18,32 @@ This project is intended for educational purposes and demonstrates the basic con
 
 ## Project Structure
 
-ThreadPool
-├── docs
-│   ├── html
-│   │   └── index.html
-│   └── latex
-│       └── refman.pdf
-├── Doxyfile
-├── examples
-│   └── main.cpp
-├── file.txt
-├── include
-│   ├── test.hpp
-│   └── ThreadPool.hpp
-├── LICENSE
-├── main
-├── Makefile
-├── README.md
-├── refman.pdf
-├── src
-│   ├── test.cpp
-│   └── ThreadPool.cpp
-└── tests
+## Project Structure
+
+```text
+ThreadPool/
+|-- docs/
+|   |-- html/
+|   |   `-- index.html
+|   |-- latex/
+|       `-- refman.pdf
+|-- Doxyfile
+|-- examples/
+|   `-- main.cpp
+|-- file.txt
+|-- include/
+|   |-- test.hpp
+|   `-- ThreadPool.hpp
+|-- LICENSE
+|-- main
+|-- Makefile
+|-- README.md
+|-- refman.pdf
+|-- src/
+|   |-- test.cpp
+|   `-- ThreadPool.cpp
+`-- tests/
+```
 
 
 
