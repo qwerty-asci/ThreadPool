@@ -54,6 +54,9 @@ private:
     /** Flag indicating when threads should terminate */
     atomic<bool> exit_flag;
 
+    /** Array of flags indicating if a thread is running a process or not */
+    atomic<bool> * process_flag;
+
     /** Indicates whether the thread pool is active */
     atomic<bool> state;
 
@@ -109,6 +112,14 @@ public:
      * @return True if the pool is running, false otherwise.
      */
     bool status();
+
+
+    /**
+     * @brief Returns the number of process in queue.
+     *
+     * @return integer with the length of the queue.
+     */
+    unsigned int length();
 
     /**
      * @brief Waits until the task queue becomes empty.

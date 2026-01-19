@@ -1,0 +1,326 @@
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept '__isoc99_printf'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept '__isoc99_sprintf'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept '__isoc99_snprintf'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept '__isoc99_fprintf'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept '__isoc99_vprintf'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept '__isoc99_vsprintf'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept '__isoc99_vsnprintf'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept '__isoc99_vfprintf'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept '__pthread_mutex_lock'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept '__pthread_mutex_unlock'
+==7542==Registered root region at 0x7f3fecf016e0 of size 96
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecf016e0 of size 96
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'pthread_mutexattr_getrobust_np'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdrmem_create'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdrstdio_create'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_short'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_u_short'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_int'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_u_int'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_long'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_u_long'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_hyper'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_u_hyper'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_longlong_t'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_u_longlong_t'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_int8_t'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_uint8_t'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_int16_t'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_uint16_t'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_int32_t'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_uint32_t'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_int64_t'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_uint64_t'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_quad_t'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_u_quad_t'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_bool'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_enum'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_char'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_u_char'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_float'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_double'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_bytes'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_string'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdrrec_create'
+==7542==Registered root region at 0x7f3fed501310 of size 80
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fed501310 of size 80
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'xdr_destroy'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'crypt'
+==7542==Registered root region at 0x7f3fecd00f40 of size 64
+==7542==Registered root region at 0x7f3fed1007a0 of size 32
+==7542==Unregistered root region at 0x7f3fecd00f40 of size 64
+==7542==Unregistered root region at 0x7f3fed1007a0 of size 32
+==7542==AddressSanitizer: failed to intercept 'crypt_r'
+==7542==AddressSanitizer: libc interceptors initialized
+|| `[0x10007fff8000, 0x7fffffffffff]` || HighMem    ||
+|| `[0x02008fff7000, 0x10007fff7fff]` || HighShadow ||
+|| `[0x00008fff7000, 0x02008fff6fff]` || ShadowGap  ||
+|| `[0x00007fff8000, 0x00008fff6fff]` || LowShadow  ||
+|| `[0x000000000000, 0x00007fff7fff]` || LowMem     ||
+MemToShadow(shadow): 0x00008fff7000 0x000091ff6dff 0x004091ff6e00 0x02008fff6fff
+redzone=16
+max_redzone=2048
+quarantine_size_mb=256M
+thread_local_quarantine_size_kb=1024K
+malloc_context_size=30
+SHADOW_SCALE: 3
+SHADOW_GRANULARITY: 8
+SHADOW_OFFSET: 0x7fff8000
+==7542==Installed the sigaction for signal 11
+==7542==Installed the sigaction for signal 7
+==7542==Installed the sigaction for signal 8
+==7542==SetCurrentThread: 0x7f3feee66000 for thread 0x7f3feed5e7c0
+==7542==T0: stack [0x7ffcd99d5000,0x7ffcda1d5000) size 0x800000; local=0x7ffcda1d356c
+==7542==Using libbacktrace symbolizer.
+==7542==AddressSanitizer Init done
+==7542==SetCurrentThread: 0x7f3feee66280 for thread 0x7f3fea6fc6c0
+==7542==SetCurrentThread: 0x7f3feee660a0 for thread 0x7f3febeff6c0
+==7542==SetCurrentThread: 0x7f3feee661e0 for thread 0x7f3feaefd6c0
+==7542==SetCurrentThread: 0x7f3feee66140 for thread 0x7f3feb6fe6c0
+==7542==T4: stack [0x7f3fe9efd000,0x7f3fea6fbf00) size 0x7fef00; local=0x7f3fea6fbe1c
+==7542==T3: stack [0x7f3fea6fe000,0x7f3feaefcf00) size 0x7fef00; local=0x7f3feaefce1c
+==7542==T1: stack [0x7f3feb700000,0x7f3febefef00) size 0x7fef00; local=0x7f3febefee1c
+==7542==T2: stack [0x7f3feaeff000,0x7f3feb6fdf00) size 0x7fef00; local=0x7f3feb6fde1c
+=================================================================
+==7542==ERROR: AddressSanitizer: stack-use-after-scope on address 0x7ffcda1d3330 at pc 0x55c68d35640e bp 0x7f3febefeac0 sp 0x7f3febefeab8
+READ of size 8 at 0x7ffcda1d3330 thread T1
+    #0 0x55c68d35640d in operator() tests/threadpool_test.cpp:29
+    #1 0x55c68d359eaf in operator() tests/../include/ThreadPool.hpp:153
+    #2 0x55c68d362cda in __invoke_impl<void, ThreadPool::submit<test_basic_execution(ThreadPool&)::<lambda()> >(test_basic_execution(ThreadPool&)::<lambda()>&&)::<lambda()>&> /usr/include/c++/12/bits/invoke.h:61
+    #3 0x55c68d3609fe in __invoke_r<void, ThreadPool::submit<test_basic_execution(ThreadPool&)::<lambda()> >(test_basic_execution(ThreadPool&)::<lambda()>&&)::<lambda()>&> /usr/include/c++/12/bits/invoke.h:111
+    #4 0x55c68d35f46c in _M_invoke /usr/include/c++/12/bits/std_function.h:290
+    #5 0x55c68d34e5cc in std::function<void ()>::operator()() const (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x4b5cc)
+    #6 0x55c68d348f9a in operator() src/ThreadPool.cpp:49
+    #7 0x55c68d34bc7c in __invoke_impl<void, ThreadPool::ThreadPool(unsigned int)::<lambda()>&> /usr/include/c++/12/bits/invoke.h:61
+    #8 0x55c68d34b8e9 in __invoke_r<void, ThreadPool::ThreadPool(unsigned int)::<lambda()>&> /usr/include/c++/12/bits/invoke.h:111
+    #9 0x55c68d34b59d in _M_invoke /usr/include/c++/12/bits/std_function.h:290
+    #10 0x55c68d34e5cc in std::function<void ()>::operator()() const (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x4b5cc)
+    #11 0x55c68d3562b9 in void std::__invoke_impl<void, std::function<void ()>>(std::__invoke_other, std::function<void ()>&&) (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x532b9)
+    #12 0x55c68d3561df in std::__invoke_result<std::function<void ()>>::type std::__invoke<std::function<void ()>>(std::function<void ()>&&) (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x531df)
+    #13 0x55c68d35607d in void std::thread::_Invoker<std::tuple<std::function<void ()> > >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x5307d)
+    #14 0x55c68d355fad in std::thread::_Invoker<std::tuple<std::function<void ()> > >::operator()() (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x52fad)
+    #15 0x55c68d355f5f in std::thread::_State_impl<std::thread::_Invoker<std::tuple<std::function<void ()> > > >::_M_run() (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x52f5f)
+    #16 0x7f3fee2d44a2  (/lib/x86_64-linux-gnu/libstdc++.so.6+0xd44a2)
+    #17 0x7f3fee4a71f4 in start_thread nptl/pthread_create.c:442
+    #18 0x7f3fee5278db in clone3 ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Address 0x7ffcda1d3330 is located in stack of thread T0 at offset 64 in frame
+    #0 0x55c68d3564f1 in test_basic_execution(ThreadPool&) tests/threadpool_test.cpp:23
+
+  This frame has 2 object(s):
+    [48, 52) 'counter' (line 25)
+    [64, 72) '<unknown>' <== Memory access at offset 64 is inside this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-use-after-scope tests/threadpool_test.cpp:29 in operator()
+Shadow bytes around the buggy address:
+  0x10001b432610: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10001b432620: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10001b432630: 00 00 00 00 00 00 00 00 00 00 f1 f1 f1 f1 00 f3
+  0x10001b432640: f3 f3 00 00 00 00 00 00 00 00 f1 f1 f1 f1 00 00
+  0x10001b432650: f3 f3 00 00 00 00 00 00 00 00 00 00 00 00 f1 f1
+=>0x10001b432660: f1 f1 f1 f1 04 f2[f8]f3 f3 f3 00 00 00 00 00 00
+  0x10001b432670: 00 00 f1 f1 f1 f1 f1 f1 00 00 00 00 00 00 00 00
+  0x10001b432680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10001b432690: 00 00 00 00 00 00 00 00 00 00 f3 f3 f3 f3 f3 f3
+  0x10001b4326a0: f3 f3 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10001b4326b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+Thread T1 created by T0 here:
+    #0 0x7f3fee649726 in __interceptor_pthread_create ../../../../src/libsanitizer/asan/asan_interceptors.cpp:207
+    #1 0x7f3fee2d4578 in std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)()) (/lib/x86_64-linux-gnu/libstdc++.so.6+0xd4578)
+    #2 0x55c68d349b33 in ThreadPool::ThreadPool(unsigned int) src/ThreadPool.cpp:64
+    #3 0x55c68d359d6f in main tests/threadpool_test.cpp:184
+    #4 0x7f3fee445249 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+==7542==ABORTING

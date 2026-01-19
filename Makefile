@@ -6,6 +6,18 @@ CXXFILES_EXAMPLE=src/test.cpp src/ThreadPool.cpp
 
 CXXFILES=src/ThreadPool.cpp
 
+
+CXXFLAGS_TEST=-g -pg -std=c++17 -Wall -Iinclude
+
+#Sanitazers to test the code
+#-> address to checks memory leaks, use-after-free, double free and buffer overflow
+#-> undefined checks for undefined errors and overflows
+#-> thread detecst race conditions, simultaneous writting and acces without mutex
+
+CXXSANITAIZERS_MEMORY= -fsanitize=address,undefined
+CXXSANITAIZERS_THREADS= -fsanitize=thread
+CXXFILES_TEST=src/ThreadPool.cpp
+
 all: shared documentation
 
 
@@ -26,6 +38,27 @@ static:
 example: src/test.cpp include/test.hpp examples/example.cpp include/ThreadPool.hpp src/ThreadPool.cpp
 	@echo "Compiling example.cpp into example"
 	@${CXX} -o example ${CXXFLAGS_DEB} ${CXXFILES_EXAMPLE} examples/example.cpp
+
+
+test:include/ThreadPool.hpp src/ThreadPool.cpp tests/threadpool_test.cpp
+	@echo "Preparing tests..."
+	@mkdir -p build/tests
+	@${CXX} -o build/tests/test ${CXXFLAGS_TEST} ${CXXFILES_TEST} tests/threadpool_test.cpp
+	@${CXX} -o build/tests/test_memory ${CXXFLAGS_TEST} ${CXXSANITAIZERS_MEMORY} ${CXXFILES_TEST} tests/threadpool_test.cpp
+	@${CXX} -o build/tests/test_threads ${CXXFLAGS_TEST} ${CXXSANITAIZERS_THREADS} ${CXXFILES_TEST} tests/threadpool_test.cpp
+	@echo "Test created in build"
+
+run_profile:build/tests/test
+	@echo "Profiling test..."
+	@./build/tests/test
+	@gprof build/tests/test build/tests/gmon.out > profile_results.txt
+	@echo "Profile finished -> build/tests/profile_results.txt"
+
+run_memory_test:build/tests/test_memory
+	@echo "Memory and undefined behavior test starting"
+	@./build/tests/test_memory > stdout_test_memory.txt 2> stderr_test_memory.txt
+	@echo "Test finished finished. Check stderr_test_memory.txt"
+
 
 
 # Target for the creation of the documentation

@@ -1,0 +1,71 @@
+=================================================================
+==9146==ERROR: AddressSanitizer: stack-use-after-scope on address 0x7ffd5f69b2d0 at pc 0x5618e266dbb4 bp 0x7ff2876fda30 sp 0x7ff2876fda28
+READ of size 8 at 0x7ffd5f69b2d0 thread T2
+    #0 0x5618e266dbb3 in operator() tests/threadpool_test.cpp:29
+    #1 0x5618e2671659 in operator() tests/../include/ThreadPool.hpp:156
+    #2 0x5618e267a484 in __invoke_impl<void, ThreadPool::submit<test_basic_execution(ThreadPool&)::<lambda()> >(test_basic_execution(ThreadPool&)::<lambda()>&&)::<lambda()>&> /usr/include/c++/12/bits/invoke.h:61
+    #3 0x5618e26781a8 in __invoke_r<void, ThreadPool::submit<test_basic_execution(ThreadPool&)::<lambda()> >(test_basic_execution(ThreadPool&)::<lambda()>&&)::<lambda()>&> /usr/include/c++/12/bits/invoke.h:111
+    #4 0x5618e2676c16 in _M_invoke /usr/include/c++/12/bits/std_function.h:290
+    #5 0x5618e26652d6 in std::function<void ()>::operator()() const (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x4f2d6)
+    #6 0x5618e265f396 in operator() src/ThreadPool.cpp:52
+    #7 0x5618e2662910 in __invoke_impl<void, ThreadPool::ThreadPool(unsigned int)::<lambda(unsigned int)>&, unsigned int> /usr/include/c++/12/bits/invoke.h:61
+    #8 0x5618e26624dd in __invoke_r<void, ThreadPool::ThreadPool(unsigned int)::<lambda(unsigned int)>&, unsigned int> /usr/include/c++/12/bits/invoke.h:111
+    #9 0x5618e266214f in _M_invoke /usr/include/c++/12/bits/std_function.h:290
+    #10 0x5618e266da28 in std::function<void (unsigned int)>::operator()(unsigned int) const (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x57a28)
+    #11 0x5618e266d6e6 in void std::__invoke_impl<void, std::function<void (unsigned int)>, unsigned int>(std::__invoke_other, std::function<void (unsigned int)>&&, unsigned int&&) (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x576e6)
+    #12 0x5618e266d54c in std::__invoke_result<std::function<void (unsigned int)>, unsigned int>::type std::__invoke<std::function<void (unsigned int)>, unsigned int>(std::function<void (unsigned int)>&&, unsigned int&&) (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x5754c)
+    #13 0x5618e266d2db in void std::thread::_Invoker<std::tuple<std::function<void (unsigned int)>, unsigned int> >::_M_invoke<0ul, 1ul>(std::_Index_tuple<0ul, 1ul>) (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x572db)
+    #14 0x5618e266d155 in std::thread::_Invoker<std::tuple<std::function<void (unsigned int)>, unsigned int> >::operator()() (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x57155)
+    #15 0x5618e266d107 in std::thread::_State_impl<std::thread::_Invoker<std::tuple<std::function<void (unsigned int)>, unsigned int> > >::_M_run() (/home/qwerty/Escritorio/personal/programacion/C++/2026/threadpool/build/tests/test_memory+0x57107)
+    #16 0x7ff28a2d44a2  (/lib/x86_64-linux-gnu/libstdc++.so.6+0xd44a2)
+    #17 0x7ff28a4a71f4 in start_thread nptl/pthread_create.c:442
+    #18 0x7ff28a5278db in clone3 ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Address 0x7ffd5f69b2d0 is located in stack of thread T0 at offset 64 in frame
+    #0 0x5618e266dc97 in test_basic_execution(ThreadPool&) tests/threadpool_test.cpp:23
+
+  This frame has 2 object(s):
+    [48, 52) 'counter' (line 25)
+    [64, 72) '<unknown>' <== Memory access at offset 64 is inside this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-use-after-scope tests/threadpool_test.cpp:29 in operator()
+Shadow bytes around the buggy address:
+  0x10002becb600: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10002becb610: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10002becb620: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 f1 f1
+  0x10002becb630: f1 f1 00 f3 f3 f3 00 00 00 00 00 00 00 00 f1 f1
+  0x10002becb640: f1 f1 00 00 f3 f3 00 00 00 00 00 00 00 00 00 00
+=>0x10002becb650: 00 00 f1 f1 f1 f1 f1 f1 04 f2[f8]f3 f3 f3 00 00
+  0x10002becb660: 00 00 00 00 00 00 f1 f1 f1 f1 00 00 00 00 00 00
+  0x10002becb670: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10002becb680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 f3 f3
+  0x10002becb690: f3 f3 f3 f3 f3 f3 00 00 00 00 00 00 00 00 00 00
+  0x10002becb6a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+Thread T2 created by T0 here:
+    #0 0x7ff28a649726 in __interceptor_pthread_create ../../../../src/libsanitizer/asan/asan_interceptors.cpp:207
+    #1 0x7ff28a2d4578 in std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)()) (/lib/x86_64-linux-gnu/libstdc++.so.6+0xd4578)
+    #2 0x5618e266028e in ThreadPool::ThreadPool(unsigned int) src/ThreadPool.cpp:69
+    #3 0x5618e2671519 in main tests/threadpool_test.cpp:184
+    #4 0x7ff28a445249 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+==9146==ABORTING

@@ -21,7 +21,7 @@ ThreadPool::ThreadPool(unsigned int num_threads)
      * Continuously checks the task queue and executes tasks
      * while the pool is active and the exit flag is not set.
      */
-    function<void(void)> f = [&]() {
+    function<void(unsigned int)> f = [&](unsigned int process_number) {
 
         function<void()> task;
 
@@ -46,7 +46,11 @@ ThreadPool::ThreadPool(unsigned int num_threads)
             this->q.pop();
 
             lock.unlock();
+
+
+            this->process_flag[process_number]=true;
             task();
+            this->process_flag[process_number]=false;
             this->cv2.notify_one();
             lock.lock();
         }
@@ -55,13 +59,15 @@ ThreadPool::ThreadPool(unsigned int num_threads)
     this->exit_flag = false;
 
     this->th = new (nothrow) thread[num_threads];
+    this->process_flag = new (nothrow) atomic<bool>[num_threads];
 
-    if (this->th != nullptr) {
+    if (this->th != nullptr && this->process_flag != nullptr) {
         this->state = true;
 
         try {
             for (unsigned int i = 0; i < this->num_threads; i++) {
-                this->th[i] = thread(f);
+                this->th[i] = thread(f,i);
+                this->process_flag[i]=false;
             }
         } catch (exception&) {
             this->state = false;
@@ -80,6 +86,20 @@ ThreadPool::ThreadPool(unsigned int num_threads)
 bool ThreadPool::status() {
     return this->state;
 }
+
+
+
+
+/**
+ * @brief Provides the number of process in queue.
+ *
+ * @return integer with the length of the queue.
+ */
+unsigned int ThreadPool::length() {
+    return this->q.size();
+}
+
+
 
 /**
  * @brief Stops the thread pool and optionally joins threads.
@@ -122,14 +142,26 @@ ThreadPool::~ThreadPool() {
 
 /**
  * @brief Waits until all queued tasks have been processed.
- *
- * @warning This function uses busy waiting and may waste CPU time.
  */
 void ThreadPool::wait() {
     unique_lock<mutex> lock(this->mtx2);
 
     this->cv2.wait(lock,[&](){
-            return this->q.empty();
+
+            bool flag=true;
+            if(this->q.empty()){
+
+                for(unsigned int i=0;i<this->num_threads;i++){
+                    if(this->process_flag[i].load()){
+                        flag=false;
+                        break;
+                    }
+                }
+
+                return flag?true:false;
+            }else{
+                return false;
+            }
         }
     );
 
