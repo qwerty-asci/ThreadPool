@@ -49,7 +49,11 @@ ThreadPool::ThreadPool(unsigned int num_threads)
 
 
             this->process_flag[process_number]=true;
-            task();
+            try{
+                task();
+            }catch(...){
+                this->error=true;
+            }
             this->process_flag[process_number]=false;
             this->cv2.notify_one();
             lock.lock();

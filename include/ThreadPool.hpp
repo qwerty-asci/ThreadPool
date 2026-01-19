@@ -131,6 +131,13 @@ public:
      * Stops the pool and releases all allocated resources.
      */
     ~ThreadPool();
+
+
+    /**
+     * @param Flag that idicates if any thread has thrown an exception
+     *
+     */
+    bool error=false;
 };
 
 /**

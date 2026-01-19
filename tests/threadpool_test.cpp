@@ -94,17 +94,17 @@ void test_exceptions_in_tasks(ThreadPool& pool) {
     atomic<int> counter{0};
 
     for (int i = 0; i < 1000; ++i) {
-        pool.submit([&]() {
+        pool.submit([](atomic<int>& counter) {
             if (rand() % 10 == 0)
                 throw runtime_error("boom");
             ++counter;
-        });
+        },counter);
     }
 
     // Si tu ThreadPool no captura excepciones,
     // este test puede matar threads silenciosamente
     pool.wait();
-    TEST_OK("test_exceptions_in_tasks (si no colgó)");
+    TEST_OK("test_exceptions_in_tasks");
 }
 
 /* ============================================================
@@ -134,9 +134,9 @@ void benchmark_throughput(ThreadPool& pool) {
     auto start = chrono::high_resolution_clock::now();
 
     for (int i = 0; i < N; ++i) {
-        pool.submit([&]() {
+        pool.submit([&](atomic<int>& counter) {
             counter.fetch_add(1, memory_order_relaxed);
-        });
+        },counter);
     }
 
     pool.wait();
@@ -158,9 +158,9 @@ void benchmark_scaling() {
         auto start = chrono::steady_clock::now();
 
         for (int i = 0; i < 200000; ++i) {
-            pool.submit([&]() {
+            pool.submit([&](atomic<int>& counter) {
                 counter.fetch_add(1, memory_order_relaxed);
-            });
+            },counter);
         }
 
         pool.wait();
@@ -196,15 +196,15 @@ int main() {
     test_basic_execution(pool);
     test_reuse_after_wait(pool);
     test_multiple_producers(pool);
-    // test_exceptions_in_tasks(pool);
+    test_exceptions_in_tasks(pool);
     //
-    // benchmark_throughput(pool);
+    benchmark_throughput(pool);
     //
-    // pool.finish();
+    pool.finish();
     //
-    // test_destruction_with_pending_tasks();
-    // benchmark_scaling();
-    // test_idle_cpu_usage();
+    test_destruction_with_pending_tasks();
+    benchmark_scaling();
+    test_idle_cpu_usage();
 
     return 0;
 }
