@@ -137,7 +137,7 @@ public:
      * @param Flag that idicates if any thread has thrown an exception
      *
      */
-    bool error=false;
+    atomic<bool> error=false;
 };
 
 /**

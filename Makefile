@@ -59,6 +59,10 @@ run_memory_test:build/tests/test_memory
 	@./build/tests/test_memory > stdout_test_memory.txt 2> stderr_test_memory.txt
 	@echo "Test finished finished. Check stderr_test_memory.txt"
 
+run_thread_test:build/tests/test_threads
+	@echo "Thread test starting"
+	@./build/tests/test_threads > stdout_test_thread.txt 2> stderr_test_thread.txt
+	@echo "Test finished finished. Check stderr_test_thread.txt"
 
 
 # Target for the creation of the documentation
