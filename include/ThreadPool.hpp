@@ -42,9 +42,6 @@ private:
     /** Mutex protecting access to the task queue */
     mutex mtx;
 
-    /** Mutex protecting used to wait until all the process finish */
-    mutex mtx2;
-
     /** Queue containing pending tasks */
     queue<function<void()>> q;
 

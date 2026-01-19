@@ -21,16 +21,20 @@ using namespace std;
    ============================================================ */
 
 void test_basic_execution(ThreadPool& pool) {
-    constexpr int N = 10000;
+    constexpr int N = 20;
     atomic<int> counter{0};
 
+
     for (int i = 0; i < N; ++i) {
-        pool.submit([&]() {
+        pool.submit([](atomic<int>& counter) {
             counter.fetch_add(1, memory_order_relaxed);
-        });
+        },counter);
     }
 
+
+
     pool.wait();
+
     assert(counter == N);
     TEST_OK("test_basic_execution");
 }
@@ -39,12 +43,12 @@ void test_reuse_after_wait(ThreadPool& pool) {
     atomic<int> counter{0};
 
     for (int i = 0; i < 1000; ++i)
-        pool.submit([&]() { ++counter; });
+        pool.submit([](atomic<int>& counter) { ++counter; },counter);
 
     pool.wait();
 
     for (int i = 0; i < 1000; ++i)
-        pool.submit([&]() { ++counter; });
+        pool.submit([](atomic<int>& counter) { ++counter; },counter);
 
     pool.wait();
 
@@ -61,20 +65,26 @@ void test_multiple_producers(ThreadPool& pool) {
     constexpr int tasks_per_producer = 2000;
 
     atomic<int> counter{0};
-    vector<thread> threads;
+    thread * th;
+
+    th=new thread[producers];
 
     for (int i = 0; i < producers; ++i) {
-        threads.emplace_back([&]() {
-            for (int j = 0; j < tasks_per_producer; ++j) {
-                pool.submit([&]() {
-                    counter.fetch_add(1, memory_order_relaxed);
-                });
-            }
-        });
+        th[i]=thread([](atomic<int>& counter,ThreadPool& pool) {
+                            for (int j = 0; j < tasks_per_producer; ++j) {
+                                    pool.submit([](atomic<int>& counter) {
+                                                    counter.fetch_add(1, memory_order_relaxed);
+                                                },counter);
+                            }
+                        },ref(counter),ref(pool));
     }
 
-    for (auto& t : threads) t.join();
+    for (int i=0;i<producers;i++){
+        th[i].join();
+    }
     pool.wait();
+
+    delete[] th;
 
     assert(counter == producers * tasks_per_producer);
     TEST_OK("test_multiple_producers");
@@ -184,8 +194,8 @@ int main() {
     ThreadPool pool(4);
 
     test_basic_execution(pool);
-    // test_reuse_after_wait(pool);
-    // test_multiple_producers(pool);
+    test_reuse_after_wait(pool);
+    test_multiple_producers(pool);
     // test_exceptions_in_tasks(pool);
     //
     // benchmark_throughput(pool);

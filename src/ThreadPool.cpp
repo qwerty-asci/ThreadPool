@@ -135,6 +135,7 @@ ThreadPool::~ThreadPool() {
     this->finish();
     try{
         delete[] this->th;
+        delete[] this->process_flag;
     }catch(...){
 
     }
@@ -144,11 +145,12 @@ ThreadPool::~ThreadPool() {
  * @brief Waits until all queued tasks have been processed.
  */
 void ThreadPool::wait() {
-    unique_lock<mutex> lock(this->mtx2);
+    unique_lock<mutex> lock(this->mtx);
 
     this->cv2.wait(lock,[&](){
 
             bool flag=true;
+
             if(this->q.empty()){
 
                 for(unsigned int i=0;i<this->num_threads;i++){
