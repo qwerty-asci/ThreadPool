@@ -40,12 +40,13 @@ example: src/test.cpp include/test.hpp examples/example.cpp include/ThreadPool.h
 	@${CXX} -o example ${CXXFLAGS_DEB} ${CXXFILES_EXAMPLE} examples/example.cpp
 
 
-test:include/ThreadPool.hpp src/ThreadPool.cpp tests/threadpool_test.cpp
+test:include/ThreadPool.hpp src/ThreadPool.cpp tests/threadpool_test.cpp tests/resource_usage.cpp
 	@echo "Preparing tests..."
 	@mkdir -p build/tests
 	@${CXX} -o build/tests/test ${CXXFLAGS_TEST} ${CXXFILES_TEST} tests/threadpool_test.cpp
 	@${CXX} -o build/tests/test_memory ${CXXFLAGS_TEST} ${CXXSANITAIZERS_MEMORY} ${CXXFILES_TEST} tests/threadpool_test.cpp
 	@${CXX} -o build/tests/test_threads ${CXXFLAGS_TEST} ${CXXSANITAIZERS_THREADS} ${CXXFILES_TEST} tests/threadpool_test.cpp
+	@${CXX} -o build/tests/test_resources -O3 -std=c++17 -Wall -Iinclude src/ThreadPool.cpp tests/resource_usage.cpp
 	@echo "Test created in build"
 
 run_profile:build/tests/test
@@ -63,6 +64,11 @@ run_thread_test:build/tests/test_threads
 	@echo "Thread test starting"
 	@./build/tests/test_threads > stdout_test_thread.txt 2> stderr_test_thread.txt
 	@echo "Test finished finished. Check stderr_test_thread.txt"
+
+run_resources:build/tests/test_resources
+	@echo "Resources test starting"
+	@./build/tests/test_resources
+	@echo "Test finished finished."
 
 
 # Target for the creation of the documentation
