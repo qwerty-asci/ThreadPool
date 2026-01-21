@@ -57,6 +57,9 @@ private:
     /** Indicates whether the thread pool is active */
     atomic<bool> state;
 
+    /** Indicates whether the thread pool is waiting to finish all the tasks or not*/
+    atomic<bool> waiting;
+
     /** Condition variable used to stop the threads until a new process is pushed */
     condition_variable cv;
 

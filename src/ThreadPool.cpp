@@ -55,12 +55,15 @@ ThreadPool::ThreadPool(unsigned int num_threads)
                 this->error=true;
             }
             this->process_flag[process_number]=false;
-            this->cv2.notify_one();
+            if(this->waiting.load()==true){
+                this->cv2.notify_one();
+            }
             lock.lock();
         }
     };
 
     this->exit_flag = false;
+    this->waiting=false;
 
     this->th = new (nothrow) thread[num_threads];
     this->process_flag = new (nothrow) atomic<bool>[num_threads];
@@ -151,6 +154,8 @@ ThreadPool::~ThreadPool() {
 void ThreadPool::wait() {
     unique_lock<mutex> lock(this->mtx);
 
+    this->waiting=true;
+
     this->cv2.wait(lock,[&](){
 
             bool flag=true;
@@ -170,5 +175,7 @@ void ThreadPool::wait() {
             }
         }
     );
+
+    this->waiting=false;
 
 }
