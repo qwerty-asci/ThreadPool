@@ -22,8 +22,8 @@ HIDE_UNDOC_CLASSES     = NO
 # Input files
 #-----------------------------
 
-INPUT                  = include src examples
-FILE_PATTERNS          = *.hpp *.h *.cpp
+INPUT                  = include/ThreadPool.hpp src/ThreadPool.cpp
+FILE_PATTERNS          = ThreadPool.hpp ThreadPool.cpp
 RECURSIVE              = YES
 
 #-----------------------------
