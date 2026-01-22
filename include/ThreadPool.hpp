@@ -160,9 +160,6 @@ void ThreadPool::submit(Func&& f, Args&&... args) {
 
     this->q.push(std::move(
         [func = std::forward<Func>(f),
-         // Capturamos cada argumento de forma segura:
-         // - lvalues → std::ref
-         // - rvalues → decayed copy
          tup = std::make_tuple(
              std::conditional_t<
                  std::is_lvalue_reference_v<Args>,
@@ -171,7 +168,6 @@ void ThreadPool::submit(Func&& f, Args&&... args) {
              >(args)...
          )
         ]() mutable {
-            // std::apply llama a la función con los argumentos guardados
             std::apply(func, tup);
         }
     ));
