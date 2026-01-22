@@ -19,9 +19,11 @@
 #include <exception>
 #include <condition_variable>
 #include <atomic>
+#include <utility>
 
 
 using namespace std;
+using namespace std::placeholders;
 
 /**
  * @class ThreadPool
@@ -143,6 +145,9 @@ public:
     atomic<bool> error=false;
 };
 
+
+
+
 /**
  * @brief Adds a new task to the task queue.
  *
@@ -156,11 +161,13 @@ void ThreadPool::submit(Func&& f, Args&&... args) {
 
     lock_guard<mutex> lock(this->mtx);
 
+    auto F=bind(f,forward<Args>(args)...);
+
 
     this->q.push(
         move(
-            [&]() {
-                f(args...);
+            [F]() {
+                F();
             }
         )
     );

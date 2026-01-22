@@ -13,7 +13,7 @@ int main(int argc, char * argv[]){
 
 	for(int i=0;i<20;i++){
 		thp.submit(test1,i);
-		this_thread::sleep_for(20ms);
+		// this_thread::sleep_for(20ms);
 	}
 
 	// cout<<"En proceso"<<endl;
@@ -27,6 +27,7 @@ int main(int argc, char * argv[]){
 	if(!thp.status()){
 		cout<<"Cerrado correctamente"<<endl;
 	}
+
 
 	return 0;
 }
