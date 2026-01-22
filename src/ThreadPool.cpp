@@ -55,10 +55,15 @@ ThreadPool::ThreadPool(unsigned int num_threads)
                 this->error=true;
             }
             this->process_flag[process_number]=false;
+
+            lock.lock();
             if(this->waiting.load()==true){
                 this->cv2.notify_one();
             }
-            lock.lock();
+        }
+
+        if(lock.owns_lock()){
+            lock.unlock();
         }
     };
 

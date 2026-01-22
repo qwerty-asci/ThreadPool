@@ -1,13 +1,13 @@
 CXX=g++
-CXXFLAGS_PROD=-O3 -std=c++17 -Wall -Iinclude -fPIC -shared
-CXXFLAGS_STAT=-O3 -c -std=c++11 -Iinclude
-CXXFLAGS_DEB=-g -pg -std=c++17 -Wall -Iinclude
+CXXFLAGS_PROD=-O3 -std=c++20 -Wall -Iinclude -fPIC -shared
+CXXFLAGS_STAT=-O3 -c -std=c++20 -Iinclude
+CXXFLAGS_DEB=-g -pg -std=c++20 -Wall -Iinclude
 CXXFILES_EXAMPLE=src/test.cpp src/ThreadPool.cpp
 
 CXXFILES=src/ThreadPool.cpp
 
 
-CXXFLAGS_TEST=-g -pg -std=c++17 -Wall -Iinclude
+CXXFLAGS_TEST=-g -pg -std=c++20 -Wall -Iinclude
 
 #Sanitazers to test the code
 #-> address to checks memory leaks, use-after-free, double free and buffer overflow
@@ -69,6 +69,10 @@ run_resources:build/tests/test_resources
 	@echo "Resources test starting"
 	@./build/tests/test_resources
 	@echo "Test finished finished."
+
+val-hel-test: example
+	@valgrind --tool=helgrind --history-level=approx -s ./example 2>informe.txt
+
 
 
 # Target for the creation of the documentation
