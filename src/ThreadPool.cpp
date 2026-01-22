@@ -116,7 +116,10 @@ unsigned int ThreadPool::length() {
 void ThreadPool::finish(bool secure) {
     this->exit_flag = true;
 
+
+    unique_lock<mutex> lock(this->mtx);
     this->cv.notify_all();
+    lock.unlock();
 
     if (secure && this->state.load()) {
         for (unsigned int i = 0; i < this->num_threads; i++) {

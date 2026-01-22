@@ -77,3 +77,4 @@ documentation: src/ThreadPool.cpp include/ThreadPool.hpp
 	@cd docs/latex;make;mv refman.pdf ../doc.pdf
 clean:
 	@rm example
+	@rm stderr_test* stdout_test*

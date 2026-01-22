@@ -153,18 +153,18 @@ template <class Func, class... Args>
 void ThreadPool::submit(Func&& f, Args&&... args) {
 
 
-    {
-        lock_guard<mutex> lock(this->mtx);
+
+    lock_guard<mutex> lock(this->mtx);
 
 
-        this->q.push(
-            move(
-                [&]() {
-                    f(args...);
-                }
-            )
-        );
-    }
+    this->q.push(
+        move(
+            [&]() {
+                f(args...);
+            }
+        )
+    );
+
 
     this->cv.notify_one();
 }
