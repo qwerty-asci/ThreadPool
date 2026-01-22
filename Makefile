@@ -1,13 +1,13 @@
 CXX=g++
-CXXFLAGS_PROD=-O3 -std=c++23 -Wall -Iinclude -fPIC -shared
-CXXFLAGS_STAT=-O3 -c -std=c++23 -Iinclude
-CXXFLAGS_DEB=-g -pg -std=c++23 -Wall -Iinclude
+CXXFLAGS_PROD=-O3 -std=c++20 -Wall -Iinclude -fPIC -shared
+CXXFLAGS_STAT=-O3 -c -std=c++20 -Iinclude
+CXXFLAGS_DEB=-g -pg -std=c++20 -Wall -Iinclude
 CXXFILES_EXAMPLE=src/test.cpp src/ThreadPool.cpp
 
 CXXFILES=src/ThreadPool.cpp
 
 
-CXXFLAGS_TEST=-g -pg -std=c++23 -Wall -Iinclude
+CXXFLAGS_TEST=-g -pg -std=c++20 -Wall -Iinclude
 
 #Sanitazers to test the code
 #-> address to checks memory leaks, use-after-free, double free and buffer overflow
@@ -46,7 +46,7 @@ test:include/ThreadPool.hpp src/ThreadPool.cpp tests/threadpool_test.cpp tests/r
 	@${CXX} -o build/tests/test ${CXXFLAGS_TEST} ${CXXFILES_TEST} tests/threadpool_test.cpp
 	@${CXX} -o build/tests/test_memory ${CXXFLAGS_TEST} ${CXXSANITAIZERS_MEMORY} ${CXXFILES_TEST} tests/threadpool_test.cpp
 	@${CXX} -o build/tests/test_threads ${CXXFLAGS_TEST} ${CXXSANITAIZERS_THREADS} ${CXXFILES_TEST} tests/threadpool_test.cpp
-	@${CXX} -o build/tests/test_resources -O3 -std=c++17 -Wall -Iinclude src/ThreadPool.cpp tests/resource_usage.cpp
+	@${CXX} -o build/tests/test_resources -O3 -std=c++20 -Wall -Iinclude src/ThreadPool.cpp tests/resource_usage.cpp
 	@echo "Test created in build"
 
 run_profile:build/tests/test

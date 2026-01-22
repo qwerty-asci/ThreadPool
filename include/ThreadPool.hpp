@@ -161,13 +161,13 @@ void ThreadPool::submit(Func&& f, Args&&... args) {
 
     lock_guard<mutex> lock(this->mtx);
 
-    auto F=bind(f,forward<Args>(args)...);
+    // auto F=bind(f,forward<Args>(args)...);
 
 
     this->q.push(
         move(
-            [F]() {
-                F();
+            [F=forward<Func>(f),...args2=forward<Args>(args)]() mutable {
+                F(args2...);
             }
         )
     );
