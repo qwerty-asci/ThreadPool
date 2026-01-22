@@ -19,6 +19,7 @@
 #include <exception>
 #include <condition_variable>
 #include <atomic>
+#include <type_traits>
 
 
 using namespace std;
@@ -157,13 +158,23 @@ void ThreadPool::submit(Func&& f, Args&&... args) {
     lock_guard<mutex> lock(this->mtx);
 
 
-    this->q.push(
-        move(
-            [&]() {
-                f(args...);
-            }
-        )
-    );
+    this->q.push(std::move(
+        [func = std::forward<Func>(f),
+         // Capturamos cada argumento de forma segura:
+         // - lvalues → std::ref
+         // - rvalues → decayed copy
+         tup = std::make_tuple(
+             std::conditional_t<
+                 std::is_lvalue_reference_v<Args>,
+                 std::reference_wrapper<std::remove_reference_t<Args>>,
+                 std::decay_t<Args>
+             >(args)...
+         )
+        ]() mutable {
+            // std::apply llama a la función con los argumentos guardados
+            std::apply(func, tup);
+        }
+    ));
 
 
     this->cv.notify_one();

@@ -28,7 +28,7 @@ void test_basic_execution(ThreadPool& pool) {
     for (int i = 0; i < N; ++i) {
         pool.submit([](atomic<int>& counter) {
             counter.fetch_add(1, memory_order_relaxed);
-        },counter);
+        },ref(counter));
     }
 
 
@@ -43,12 +43,12 @@ void test_reuse_after_wait(ThreadPool& pool) {
     atomic<int> counter{0};
 
     for (int i = 0; i < 1000; ++i)
-        pool.submit([](atomic<int>& counter) { ++counter; },counter);
+        pool.submit([](atomic<int>& counter) { ++counter; },ref(counter));
 
     pool.wait();
 
     for (int i = 0; i < 1000; ++i)
-        pool.submit([](atomic<int>& counter) { ++counter; },counter);
+        pool.submit([](atomic<int>& counter) { ++counter; },ref(counter));
 
     pool.wait();
 
@@ -98,7 +98,7 @@ void test_exceptions_in_tasks(ThreadPool& pool) {
             if (rand() % 10 == 0)
                 throw runtime_error("boom");
             ++counter;
-        },counter);
+        },ref(counter));
     }
 
     // Si tu ThreadPool no captura excepciones,
@@ -136,7 +136,7 @@ void benchmark_throughput(ThreadPool& pool) {
     for (int i = 0; i < N; ++i) {
         pool.submit([&](atomic<int>& counter) {
             counter.fetch_add(1, memory_order_relaxed);
-        },counter);
+        },ref(counter));
     }
 
     pool.wait();
@@ -160,7 +160,7 @@ void benchmark_scaling() {
         for (int i = 0; i < 200000; ++i) {
             pool.submit([&](atomic<int>& counter) {
                 counter.fetch_add(1, memory_order_relaxed);
-            },counter);
+            },ref(counter));
         }
 
         pool.wait();
