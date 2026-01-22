@@ -23,7 +23,6 @@
 
 
 using namespace std;
-using namespace std::placeholders;
 
 /**
  * @class ThreadPool
@@ -161,7 +160,6 @@ void ThreadPool::submit(Func&& f, Args&&... args) {
 
     lock_guard<mutex> lock(this->mtx);
 
-    // auto F=bind(f,forward<Args>(args)...);
 
 
     this->q.push(
