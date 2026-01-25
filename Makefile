@@ -18,7 +18,7 @@ CXXSANITAIZERS_MEMORY= -fsanitize=address,undefined
 CXXSANITAIZERS_THREADS= -fsanitize=thread
 CXXFILES_TEST=src/ThreadPool.cpp
 
-all: shared documentation
+all: shared documentation static example test  run_profile run_memory_test run_resources run_thread_test val-hel-test
 
 
 shared:
@@ -52,7 +52,7 @@ test:include/ThreadPool.hpp src/ThreadPool.cpp tests/threadpool_test.cpp tests/r
 run_profile:build/tests/test
 	@echo "Profiling test..."
 	@./build/tests/test
-	@gprof build/tests/test build/tests/gmon.out > profile_results.txt
+	@gprof build/tests/test gmon.out > profile_results.txt
 	@echo "Profile finished -> build/tests/profile_results.txt"
 
 run_memory_test:build/tests/test_memory
@@ -80,5 +80,4 @@ documentation: src/ThreadPool.cpp include/ThreadPool.hpp
 	@doxygen -q Doxyfile > /dev/null 2>&1
 	@cd docs/latex;make;mv refman.pdf ../doc.pdf
 clean:
-	@rm example
-	@rm stderr_test* stdout_test*
+	@./clean.sh
