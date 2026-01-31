@@ -109,14 +109,14 @@ public:
      *
      * @return True if the pool is running, false otherwise.
      */
-    bool status();
+    bool status() noexcept;
 
     /**
      * @brief Returns the number of pending tasks in the queue.
      *
      * @return Number of tasks currently in the queue.
      */
-    unsigned int length();
+    unsigned int length() noexcept;
 
     /**
      * @brief Waits until the task queue becomes empty.
@@ -130,7 +130,7 @@ public:
      *
      * Stops the thread pool and releases all allocated resources.
      */
-    ~ThreadPool();
+    ~ThreadPool() noexcept;
 
     /**
      * @brief Indicates whether any worker thread has thrown an exception.

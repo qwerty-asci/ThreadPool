@@ -97,7 +97,7 @@ ThreadPool::ThreadPool(unsigned int num_threads)
  *
  * @return True if the pool is active, false otherwise.
  */
-bool ThreadPool::status() {
+bool ThreadPool::status() noexcept {
     return this->state;
 }
 
@@ -106,7 +106,7 @@ bool ThreadPool::status() {
  *
  * @return Number of tasks currently stored in the queue.
  */
-unsigned int ThreadPool::length() {
+unsigned int ThreadPool::length() noexcept {
     return this->q.size();
 }
 
@@ -146,7 +146,7 @@ void ThreadPool::finish(bool secure) {
  * Ensures that the thread pool is stopped and all
  * allocated resources are released.
  */
-ThreadPool::~ThreadPool() {
+ThreadPool::~ThreadPool() noexcept{
     this->finish();
     try {
         delete[] this->th;
